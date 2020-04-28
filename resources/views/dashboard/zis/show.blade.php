@@ -56,7 +56,7 @@
                     </span>
                     <span class="text">Print</span>
                 </a>
-                <a href="{{route('zis.edit', $zis->id)}}" class="btn btn-primary btn-icon-split">
+                <a href="{{route('zis.edit', $zis->uuidq)}}" class="btn btn-primary btn-icon-split">
                     <span class="icon text-white-50">
                       <i class="fas fa-pen"></i>
                     </span>

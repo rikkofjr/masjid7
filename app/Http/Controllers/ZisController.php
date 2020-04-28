@@ -170,7 +170,8 @@ class ZisController extends Controller
         $zis->jumlah_jiwa = $request->jumlah_jiwa;
         if(isset($request->uang)){
             $zis->uang = str_replace(".", "", $request->uang);
-        }else if(isset($request->uang_infaq)){
+        }
+        if(isset($request->uang_infaq)){
             $zis->uang_infaq = str_replace(".", "", $request->uang_infaq);
         }
 
@@ -182,7 +183,7 @@ class ZisController extends Controller
 
     //Display a successful message upon save
         //dd($zis);
-        return redirect()->route('zis.show', $zis->id);
+        return redirect()->route('zis.show', $zis->uuidq);
         //return $zis->uuidq;
      }
 
@@ -208,9 +209,16 @@ class ZisController extends Controller
      */
     public function edit($id)
     {
+        
         $zis = Zis::findOrFail($id); //Get user with specified id
         $ZisType = ZisType::all()->sortBy('id')->pluck('zis_name', 'id');
-        return view('dashboard.zis.edit', compact('zis','ZisType'));
+        if(Auth::user()->id == $zis->amil || Auth::user()->hasPermissionTo('Soft Delete Masjid Report')){
+            return view('dashboard.zis.edit', compact('zis','ZisType'));
+        }else{
+            abort('404');
+        }
+
+        
     }
 
     /**
@@ -241,8 +249,16 @@ class ZisController extends Controller
         $zis->atas_nama = $request->atas_nama;
         $zis->nama_lain = $request->nama_lain;
         $zis->jumlah_jiwa = $request->jumlah_jiwa;
-        $zis->uang = $request->uang;
-        $zis->uang_infaq = $request->uang_infaq;
+        if(isset($request->uang)){
+            $zis->uang = str_replace(".", "", $request->uang);
+        }else{
+            $zis->uang = $request->uang;
+        }
+        if(isset($request->uang_infaq)){
+            $zis->uang_infaq = str_replace(".", "", $request->uang_infaq);
+        }else{
+            $zis->uang_infaq = $request->uang_infaq;
+        }
         $zis->beras = $request->beras;
         $zis->beras_infaq = $request->beras_infaq;
         $zis->hijri = \GeniusTS\HijriDate\Date::today();
@@ -250,7 +266,7 @@ class ZisController extends Controller
 
     //Display a successful message upon save
         //dd($zis);
-        return redirect()->route('zis.show', $zis->uuid)->with('Berubah', 'Berhasil dirubahh');
+        return redirect()->route('zis.show', $zis->uuidq)->with('rubah', 'Berhasil dirubahh');
     }
 
     /**
@@ -308,8 +324,21 @@ class ZisController extends Controller
                 ->where('zis_name', 2)
                 ->limit(5)
                 ->get();
+        
+        $zisFidyah = Zis::select(
+            DB::raw('sum(uang) as totalUang'), 
+            DB::raw('sum(uang_infaq) as totalUangInfaq'), 
+            DB::raw('sum(beras) as totalBeras'), 
+            DB::raw('sum(beras_infaq) as totalBerasInfaq'), 
+            DB::raw("DATE_FORMAT(hijri,'%Y') as tahunHijriah")
+                )
+                ->groupBy('tahunHijriah')
+                ->orderBy('created_at', 'DESC')
+                ->where('zis_name', 3)
+                ->limit(5)
+                ->get();
         //return $zisFitrah->toJson();
-        return view('dashboard.zis.arsip', compact('zisFitrah','zisMall'));
+        return view('dashboard.zis.arsip', compact('zisFitrah','zisMall', 'zisFidyah'));
     }
     //Print Data
     public function PrintZakat($zis_id){

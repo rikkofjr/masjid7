@@ -30,6 +30,12 @@
     }
 </style>
 <!--Row2-->
+@if(Session::has('edit'))
+            <div class="container">      
+                <div class="alert alert-success"><em> {!! session('edit') !!}</em>
+                </div>
+            </div>
+        @endif 
 <div class="row">
 	<div class="col-md-8">
 		<div class="card shadow mb-4">
@@ -50,7 +56,7 @@
                             <tr>
                                 <td>1</td>
                                 <td>{{$kp->created_at->format('j F, Y')}}</td>
-                                <td>{{$kp->keterangan}}</td>
+                                <td><a href="{{route('kas-pengeluaran.edit', $kp->id)}}">{{$kp->keterangan}}</a></td>
                                 <td style="text-align:right;">{{number_format($kp->pengeluaran)}}</td>
                             </tr>
                         @endforeach

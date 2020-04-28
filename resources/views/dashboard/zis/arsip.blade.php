@@ -50,37 +50,70 @@
             </div>
         </div>
 	</div>
-    <div class="col-md-12 col-lg-12 col-xl-6 p-2">
-        <div class="card">
-            <div class="card-header">
-				Arsip Zakat Mall
-            </div>
-            <div class="card-body">
-				<table class="table table-stripped">
-					<tr>
-						<td rowspan="2">Tahun Hijriah/Masehi</td>
-						<td colspan="2">Uang</td>
-						<td colspan="2">Beras</td>
-					</tr>
-					<tr>
-						<td>Uang</td>
-						<td>Uang Infaq</td>
-						<td>Beras</td>
-						<td>Beras Infaq</td>
-					</tr>
-					@foreach($zisMall as $zisFtr)
-					<tr>
-						<td>{{$zisFtr->tahunHijriah}} Hijriah</td>
-						<td>{{number_format($zisFtr->totalUang)}}</td>
-						<td>{{number_format($zisFtr->totalUangInfaq)}}</td>
-						<td>{{$zisFtr->totalBeras}}</td>
-						<td>{{$zisFtr->totalBerasInfaq}}</td>
-					</tr>
-					@endforeach
-				</table>
-            </div>
+  <div class="col-md-12 p-2">
+      <div class="card">
+        <div class="card-header">
+          Arsip Zakat Mall
         </div>
-	</div>
+        <div class="card-body">
+          <table class="table table-stripped">
+            <tr>
+              <td rowspan="2">Tahun Hijriah/Masehi</td>
+              <td colspan="2">Uang</td>
+              <td colspan="2">Beras</td>
+            </tr>
+            <tr>
+              <td>Uang</td>
+              <td>Uang Infaq</td>
+              <td>Beras</td>
+              <td>Beras Infaq</td>
+            </tr>
+            @foreach($zisMall as $zisFtr)
+            <tr>
+              <td>{{$zisFtr->tahunHijriah}} Hijriah</td>
+              <td>{{number_format($zisFtr->totalUang)}}</td>
+              <td>{{number_format($zisFtr->totalUangInfaq)}}</td>
+              <td>{{$zisFtr->totalBeras}}</td>
+              <td>{{$zisFtr->totalBerasInfaq}}</td>
+            </tr>
+            @endforeach
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-12 p-2">
+      <div class="card">
+        <div class="card-header">
+          Arsip Zakat Fidyah
+        </div>
+        <div class="card-body">
+          <table class="table table-stripped">
+            <tr>
+              <td rowspan="2">Tahun Hijriah/Masehi</td>
+              <td colspan="2">Uang</td>
+              <td colspan="2">Beras</td>
+            </tr>
+            <tr>
+              <td>Uang</td>
+              <td>Uang Infaq</td>
+              <td>Beras</td>
+              <td>Beras Infaq</td>
+            </tr>
+            @foreach($zisFidyah as $zisFtr)
+            <tr>
+              <td>{{$zisFtr->tahunHijriah}} Hijriah</td>
+              <td>{{number_format($zisFtr->totalUang)}}</td>
+              <td>{{number_format($zisFtr->totalUangInfaq)}}</td>
+              <td>{{$zisFtr->totalBeras}}</td>
+              <td>{{$zisFtr->totalBerasInfaq}}</td>
+            </tr>
+            @endforeach
+          </table>
+        </div>
+      </div>
+    </div>
+  
 </div>
 <div class="row ">
 	<div class="col-md-12 p-2">

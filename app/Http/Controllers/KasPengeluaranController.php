@@ -94,7 +94,10 @@ class KasPengeluaranController extends Controller
      */
     public function edit($id)
     {
-        //
+        $nowMasehi = Carbon::today()->format('Y');
+        $kasPengeluaran = KasPengeluaran::findOrfail($id);
+        //dd($kasPengeluaran);
+        return view('dashboard.kas.pengeluaran.edit', compact('nowMasehi', 'kasPengeluaran'));
     }
 
     /**
@@ -106,7 +109,21 @@ class KasPengeluaranController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $messages = [
+            'keterangan.required' => 'Keterangan Wajid Diisi',
+            'pengeluaran.required' => 'Jumlah uang dikeluarkan harap diisi',
+        ];
+        $this->validate($request, [
+            'keterangan'=>'required', 
+            'pengeluaran'=>'required'
+        ],$messages);
+        $kp = KasPengeluaran::findOrFail($id);
+        $kp->keterangan = $request->keterangan;
+        $kp->catatan = $request->catatan;
+        $kp->pengeluaran = str_replace(".", "", $request->pengeluaran);
+        $kp->pj = Auth::user()->id;
+        $kp->save();
+        return redirect()->route('kas-pengeluaran.index')->with('edit', 'Data ' .$kp->keterangan. ' berhasil di rubah');
     }
 
     /**
