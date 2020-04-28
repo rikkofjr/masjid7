@@ -48,13 +48,28 @@
 
         <!-- Divider -->
         <hr class="sidebar-divider">
-
+        @can('Create Masjid Report')
         <!-- Heading -->
         <div class="sidebar-heading">
-            Zis & Qurban
+           Data Masjid
         </div>
 
         <!-- Nav Item - Pages Collapse Menu -->
+        @can('Soft Delete Masjid Report')
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#kas" aria-expanded="true" aria-controls="kas">
+            <i class="fas fa-fw fa-money-bill-wave"></i>
+            <span>Kas</span>
+            </a>
+            <div id="kas" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+              <div class="bg-white py-2 collapse-inner rounded">
+                  <a class="collapse-item" href="{{route ('kas-penerimaan.index')}}">Penerimaan</a>
+                  <a class="collapse-item" href="{{route ('kas-pengeluaran.index')}}">Pengeluaran</a>
+              </div>
+            </div>
+        </li>
+        @endcan
+
         <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
             <i class="fas fa-fw fa-money-bill-wave"></i>
@@ -84,31 +99,36 @@
         </li>
 
         <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#kas" aria-expanded="true" aria-controls="kas">
-            <i class="fas fa-fw fa-money-bill-wave"></i>
-            <span>Kas</span>
-            </a>
-            <div id="kas" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-              <div class="bg-white py-2 collapse-inner rounded">
-                  <a class="collapse-item" href="{{route ('kas-penerimaan.index')}}">Penerimaan</a>
-                  <a class="collapse-item" href="{{route ('kas-pengeluaran.index')}}">Pengeluaran</a>
-              </div>
-            </div>
-        </li>
-
-        <li class="nav-item">
           <a href="{{route('alamat-jamaah.index')}}" class="nav-link collapsed">
-            <i class="fas fa-user"></i>
+            <i class="fas fa-users"></i>
             <span>Jamaah</span>
           </a>
         </li>
+        @endcan
 
         <!-- Divider -->
         <hr class="sidebar-divider">
 
         <!-- Heading -->
+        @can('Administer roles & permissions')
+        <div class="sidebar-heading">Admin</div>
+        <!--link for admin-->
         
-        !-->
+          <li class="nav-item">
+              <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#users" aria-expanded="true" aria-controls="kas">
+              <i class="fas fa-fw fa-user"></i>
+              <span>Users</span>
+              </a>
+              <div id="users" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item" href="{{route ('users.index')}}">Users</a>
+                    <a class="collapse-item" href="{{route ('roles.index')}}">Roles</a>
+                    <a class="collapse-item" href="{{route ('permissions.index')}}">Permissions</a>
+                </div>
+              </div>
+          </li>
+        @endcan
+        
 
         <!-- Divider -->
         <hr class="sidebar-divider d-none d-md-block">

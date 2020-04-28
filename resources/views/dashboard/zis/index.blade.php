@@ -14,7 +14,12 @@
         text-align:right;
     }
 </style>
-
+	@if(Session::has('hapus'))
+            <div class="container">      
+                <div class="alert alert-success"><em> {!! session('hapus') !!}</em>
+                </div>
+            </div>
+        @endif 
 <!--Row2-->
 <div class="row">
 	<div class="col-md-12 col-sm-12">
@@ -160,7 +165,9 @@
 					columns: [
                         //{ data: 'DT_RowIndex', name:'DT_RowIndex',seacrhable:false, orderable:false},
                         { data: 'created_at', name: 'created_at' },
-                        { data: 'atas_nama', name: 'atas_nama'},
+                        { data: 'atas_nama', name: 'atas_nama', render(data, type, row){
+							return "<a href='/dashboard/zis/"+row.uuidq+"'>" +row.atas_nama+  "</a>"
+						}},
 						{ data: 'uang', name: 'uang', className:'text-right' },
 						{ data: 'uang_infaq', name: 'uang_infaq', className:'text-right'},
 						{ data: 'beras', name: 'beras', className:'text-right' },
@@ -175,7 +182,9 @@
 					columns: [
                         //{ data: 'DT_RowIndex', name:'DT_RowIndex',seacrhable:false, orderable:false},
                         { data: 'created_at', name: 'created_at' },
-                        { data: 'atas_nama', name: 'atas_nama'},
+                        { data: 'atas_nama', name: 'atas_nama', render(data, type, row){
+							return "<a href='/dashboard/zis/"+row.uuidq+"'>" +row.atas_nama+  "</a>"
+						}},
 						{ data: 'uang', name: 'uang', className:'text-right' },
 						{ data: 'uang_infaq', name: 'uang_infaq', className:'text-right'},
 						{ data: 'beras', name: 'beras' , className:'text-right'},
@@ -190,7 +199,9 @@
 					columns: [
                         //{ data: 'DT_RowIndex', name:'DT_RowIndex',seacrhable:false, orderable:false},
                         { data: 'created_at', name: 'created_at' },
-                        { data: 'atas_nama', name: 'atas_nama'},
+                        { data: 'atas_nama', name: 'atas_nama', render(data, type, row){
+							return "<a href='/dashboard/zis/"+row.uuidq+"'>" +row.atas_nama+  "</a>"
+						}},
 						{ data: 'uang', name: 'uang' , className:'text-right'},
 						{ data: 'uang_infaq', name: 'uang_infaq', className:'text-right'},
 						{ data: 'beras', name: 'beras' , className:'text-right'},

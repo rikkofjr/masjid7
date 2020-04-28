@@ -61,25 +61,20 @@
                         <h4>Uang</h4>
                         <hr>
                         <div class="form-group">
-                            {{ Form::label('uang', 'Uang Zakat Per Orang') }}
+                            {{ Form::label('uang', 'Total Uang Zakat') }}
                             {{ Form::text('uang', '', array('class' => 'form-control number-form', 'id' =>'tanpa-rupiah')) }}
                         </div>
 
                         <div class="form-group">
                             {{ Form::label('uang_infaq', 'Uang Infaq') }}
-                            {{ Form::number('uang_infaq', '', array('class' => 'form-control number-form')) }}
-                        </div>
-
-                        <div class="form-group">
-                            {{ Form::label('uang_shadaqoh', 'Uang Zakat Per Orang') }}
-                            {{ Form::number('uang_shadaqoh', '', array('class' => 'form-control number-form')) }}
+                            {{ Form::text('uang_infaq', '', array('class' => 'form-control number-form tanpa-rupiah', 'id' =>'tanpa-rupiah1')) }}
                         </div>
                     </div>
                     <div class="col-md-6">
                         <h4>Beras</h4>
                         <hr>
                         <div class="form-group">
-                            {{ Form::label('beras', 'Uang Zakat Per Orang') }}
+                            {{ Form::label('beras', 'Total Uang Fitrah')}}
                             {{ Form::number('beras', '', array(
                                 'class' => 'form-control number-form', 
                                 'step' => 'any'
@@ -87,13 +82,8 @@
                         </div>
 
                         <div class="form-group">
-                            {{ Form::label('beras_infaq', 'Uang Infaq') }}
+                            {{ Form::label('beras_infaq', 'Beras Infaq') }}
                             {{ Form::number('beras_infaq', '', array('class' => 'form-control number-form')) }}
-                        </div>
-
-                        <div class="form-group">
-                            {{ Form::label('beras_shadaqoh', 'Uang Zakat Per Orang') }}
-                            {{ Form::number('beras_shadaqoh', '', array('class' => 'form-control number-form')) }}
                         </div>
                     </div>
                 </div>
@@ -112,11 +102,18 @@
     <!--<script src="{{asset ('js/calculate.js')}}"></script>-->
     <script type="text/javascript">
 		var tanpa_rupiah = document.getElementById('tanpa-rupiah');
-	tanpa_rupiah.addEventListener('keyup', function(e)
-	{
-		tanpa_rupiah.value = formatRupiah(this.value);
-	});
-	
+        tanpa_rupiah.addEventListener('keyup', function(e)
+        {
+            tanpa_rupiah.value = formatRupiah(this.value);
+        });
+
+		var tanpa_rupiah1 = document.getElementById('tanpa-rupiah1');
+        tanpa_rupiah1.addEventListener('keyup', function(e)
+        {
+            tanpa_rupiah1.value = formatRupiah(this.value);
+        });
+		
+       
 	
 	/* Fungsi */
 	function formatRupiah(angka, prefix)

@@ -32,22 +32,21 @@ class ZisController extends Controller
         $nowMasehi = Carbon::today()->format('Y');
         $dataFitrah = Zis::orderBy('id','desc')
         ->whereYear('hijri',$nowHijri)
-        ->where('zis_name', 1);
-        
+        ->where('zis_name', 1)->get(); 
         return Datatables::of($dataFitrah)
-        ->editColumn(('uang'), function ($datafitrah){
-            return $datafitrah->uang ? with (number_format($datafitrah->uang)) : '';
-        })
-        ->editColumn(('uang_infaq'), function ($datafitrah){
-            return $datafitrah->uang_infaq ? with (number_format($datafitrah->uang_infaq)) : '';
-        })
-        ->editColumn('created_at', function ($datafitrah){
-            return $datafitrah->created_at ? with (new carbon($datafitrah->created_at))->format('d/m/Y | H:i') : '';
-        })
-        ->removeColumn('id','updated_at','nama_lain','zis_name')
-        //->addIndexColumn()
-        ->make();
-    }
+            ->editColumn(('uang'), function ($datafitrah){
+                return $datafitrah->uang ? with (number_format($datafitrah->uang)) : '';
+            })
+            ->editColumn(('uang_infaq'), function ($datafitrah){
+                return $datafitrah->uang_infaq ? with (number_format($datafitrah->uang_infaq)) : '';
+            })
+            ->editColumn('created_at', function ($datafitrah){
+                return $datafitrah->created_at ? with (new carbon($datafitrah->created_at))->format('d/m/Y | H:i') : '';
+            })
+            ->removeColumn('updated_at','nama_lain','zis_name')
+            //->addIndexColumn()
+            ->make();
+    } 
     public function getMallDataByYear(){
         $nowHijri = \GeniusTS\HijriDate\Date::today()->format('Y');
         $nowMasehi = Carbon::today()->format('Y');
@@ -65,7 +64,7 @@ class ZisController extends Controller
         ->editColumn(('uang_infaq'), function ($datafitrah){
             return $datafitrah->uang_infaq ? with (number_format($datafitrah->uang_infaq)) : '';
         })
-        ->removeColumn('id','updated_at','nama_lain','zis_name')
+        ->removeColumn('updated_at','nama_lain','zis_name')
         //->addIndexColumn()
         ->make();
     }
@@ -87,7 +86,7 @@ class ZisController extends Controller
         ->editColumn(('uang_infaq'), function ($datafitrah){
             return $datafitrah->uang_infaq ? with (number_format($datafitrah->uang_infaq)) : '';
         })
-        ->removeColumn('id','updated_at','nama_lain','zis_name')
+        ->removeColumn('updated_at','nama_lain','zis_name')
         //->addIndexColumn()
         ->make();
     }
@@ -153,7 +152,8 @@ class ZisController extends Controller
         //Validating title and body field
         $messages = [
             'atas_nama.required' => 'Atas Nama Formulir Wajid Diisi',
-            'jumlah_jiwa.required' => 'Jumlah Jiwa harap diisi',
+            'jumlah_jiwa.required' => 'Jumlah jiwa harap diisi',
+            'zis_name.required' => 'Jenis zakat harap diisi',
         ];
         $this->validate($request, [
             'zis_name'=>'required', 
@@ -168,19 +168,22 @@ class ZisController extends Controller
         $zis->atas_nama = $request->atas_nama;
         $zis->nama_lain = $request->nama_lain;
         $zis->jumlah_jiwa = $request->jumlah_jiwa;
-        $zis->uang = str_replace(".", "", $request->uang);
-        $zis->uang_infaq = $request->uang_infaq;
-        $zis->jumlah_uang_shadaqoh = $request->jumlah_uang_shadaqoh;
+        if(isset($request->uang)){
+            $zis->uang = str_replace(".", "", $request->uang);
+        }else if(isset($request->uang_infaq)){
+            $zis->uang_infaq = str_replace(".", "", $request->uang_infaq);
+        }
+
         $zis->beras = $request->beras;
         $zis->beras_infaq = $request->beras_infaq;
-        $zis->beras_shadaqoh = $request->beras_shadaqoh;
         $zis->uuidq = Uuid::uuid4()->getHex();
         $zis->hijri = \GeniusTS\HijriDate\Date::today();
         $zis->save();
 
     //Display a successful message upon save
         //dd($zis);
-        return redirect()->route('zis.show', array('id' => $zis->id));
+        return redirect()->route('zis.show', $zis->id);
+        //return $zis->uuidq;
      }
 
     /**
@@ -193,6 +196,8 @@ class ZisController extends Controller
     {
         $zis = Zis::findOrFail($id);
         return view('dashboard.zis.show', compact('zis'));
+        //return $zis;
+        //dd($zis);
     }
 
     /**
@@ -217,7 +222,35 @@ class ZisController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        //Validating title and body field
+        $messages = [
+            'atas_nama.required' => 'Atas Nama Formulir Wajid Diisi',
+            'jumlah_jiwa.required' => 'Jumlah jiwa harap diisi',
+            'zis_name.required' => 'Jenis zakat harap diisi',
+        ];
+        $this->validate($request, [
+            'zis_name'=>'required', 
+            //'amil'=>'required', 
+            'atas_nama'=>'required', 
+            'jumlah_jiwa'=>'required', 
+        ],$messages);
+
+        $zis = Zis::findOrFail($id);
+        $zis->zis_name = $request->zis_name;
+        //$zis->amil = Auth::user()->id;
+        $zis->atas_nama = $request->atas_nama;
+        $zis->nama_lain = $request->nama_lain;
+        $zis->jumlah_jiwa = $request->jumlah_jiwa;
+        $zis->uang = $request->uang;
+        $zis->uang_infaq = $request->uang_infaq;
+        $zis->beras = $request->beras;
+        $zis->beras_infaq = $request->beras_infaq;
+        $zis->hijri = \GeniusTS\HijriDate\Date::today();
+        $zis->save();
+
+    //Display a successful message upon save
+        //dd($zis);
+        return redirect()->route('zis.show', $zis->uuid)->with('Berubah', 'Berhasil dirubahh');
     }
 
     /**
@@ -230,7 +263,23 @@ class ZisController extends Controller
     {
         //
     }
+    public function softDelete($id){
+        //softdelte record
+        if(Auth::user()->hasPermissionTo('Soft Delete Masjid Report')){
+            $zis = zis::findOrFail($id);
+            $zis->delete();
+            session()->put('hapus', $msg);
+            return route('zis.index');  
+        }else{
+            abort('404');
+        }
+         
+    }
+
     //addtional function
+    /*
+        this function will be use for "arsip"
+    */
     public function zisArchive(){
         $nowHijri = \GeniusTS\HijriDate\Date::today()->format('Y');
         $zisFitrah = Zis::select(

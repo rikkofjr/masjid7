@@ -26,7 +26,8 @@ class Zis extends Model
     ];
     protected $table ='tb_zis';
     protected $dates = ['deleted_at'];
-    //protected $primaryKey ='uuidq';
+    protected $primaryKey ='uuidq';
+    protected $keyType = 'string';
 
     public function jenis_zakat(){
         return $this->belongsTo('App\Models\ZisType', 'zis_name');

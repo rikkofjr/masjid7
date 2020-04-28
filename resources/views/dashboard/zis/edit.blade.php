@@ -28,6 +28,12 @@
                     </ul>
                 </div>
             @endif
+            @if(Session::has('flash_message'))
+            <div class="container">      
+                <div class="alert alert-success"><em> {!! session('flash_message') !!}</em>
+                </div>
+            </div>
+        @endif 
             {{ Form::model($zis, array('route' => array('zis.update', $zis->id), 'method' => 'PUT')) }}
 
 
@@ -70,10 +76,6 @@
                             {{ Form::number('uang_infaq', null, array('class' => 'form-control number-form')) }}
                         </div>
 
-                        <div class="form-group">
-                            {{ Form::label('uang_shadaqoh', 'Uang Zakat Per Orang') }}
-                            {{ Form::number('uang_shadaqoh', '', array('class' => 'form-control number-form')) }}
-                        </div>
                     </div>
                     <div class="col-md-6">
                         <h4>Beras</h4>
@@ -89,11 +91,6 @@
                         <div class="form-group">
                             {{ Form::label('beras_infaq', 'Beras Infaq') }}
                             {{ Form::number('beras_infaq', null, array('class' => 'form-control number-form')) }}
-                        </div>
-
-                        <div class="form-group">
-                            {{ Form::label('beras_shadaqoh', 'Uang Zakat Per Orang') }}
-                            {{ Form::number('beras_shadaqoh', '', array('class' => 'form-control number-form')) }}
                         </div>
                     </div>
                 </div>

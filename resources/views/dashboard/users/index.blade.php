@@ -19,48 +19,21 @@
 					<table class="table mb-none">
 						<thead>
 							<tr>
-				    			<th>#</th>
 								<th>Nama</th>
 								<th>Email</th>
 								<th>Nomor Handphone</th>
 								<th>Peran</th>
-					    		<th>act</th>
 							</tr>
 						</thead>
 						<tbody>
+							@foreach($users as $user)
 					    	<tr>
-						    	<td>1</td>
-								<td>Mark</td>
-								<td>Otto</td>
-								<td>@mdo</td>
-								<td>@mdo</td>
-								<td class="actions-hover actions-fade">
-									<a href=""><i class="fa fa-pencil"></i></a>
-						    		<a href="" class="delete-row"><i class="fa fa-trash-o"></i></a>
-								</td>
+								<td>{{$user->name}}</td>
+								<td>{{$user->email}}</td>
+								<td>{{$user->username}}</td>
+								<td>{{$user->roles->pluck('name')}}</td>
 							</tr>
-					    	<tr>
-						    	<td>2</td>
-								<td>Mark</td>
-								<td>Otto</td>
-								<td>@mdo</td>
-								<td>@mdo</td>
-								<td class="actions-hover actions-fade">
-									<a href=""><i class="fa fa-pencil"></i></a>
-						    		<a href="" class="delete-row"><i class="fa fa-trash-o"></i></a>
-								</td>
-							</tr>
-					    	<tr>
-						    	<td>3</td>
-								<td>Mark</td>
-								<td>Otto</td>
-								<td>@mdo</td>
-								<td>@mdo</td>
-								<td class="actions-hover actions-fade">
-									<a href=""><i class="fa fa-pencil"></i></a>
-						    		<a href="" class="delete-row"><i class="fa fa-trash-o"></i></a>
-								</td>
-							</tr>
+							@endforeach
 						</tbody>
 					</table>
                 </div>

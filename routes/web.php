@@ -20,7 +20,10 @@ Route::get('/zakat', 'ClientController@zakat')->name('clientZakat');
 Route::get('/qurban', 'ClientController@qurban')->name('clientQurban');
 Route::get('/blogcontent/{slug}', 'ClientController@blogContent')->name('blogContent');
 
-Auth::routes();
+Auth::routes([
+    //disable register
+    'register' => false
+]);
 
 
 //Route::get('/post', 'PostController@index')->name('home');
@@ -44,6 +47,7 @@ Route::group(['prefix' => 'dashboard'], function () {
     //Zis Route
     Route::resource('zis', 'ZisController');
     Route::get('arsip/zis','ZisController@zisArchive')->name('zisArchive');
+    Route::get('softdelete/zis/{id}','ZisController@softDelete')->name('softDeleteZis');
     //Qurban Route
     Route::resource('qurban', 'QurbanController');
     Route::get('arsip/qurban','QurbanController@qurbanArchive')->name('qurbanArchive');

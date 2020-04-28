@@ -13,7 +13,7 @@
                 <h4>Tambah Pengguna</h4>
             </div>
             <div class="card-body">
-            {{ Form::open(array('url' => 'users')) }}
+            {{ Form::open(array('route' => 'users.store')) }}
 
                 <div class="form-group">
                     {{ Form::label('name', 'Name') }}
