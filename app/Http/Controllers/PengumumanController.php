@@ -89,7 +89,12 @@ class PengumumanController extends Controller
         
         $pengumuman = Pengumuman::findOrfail($id);
         //dd($pengumuman);
-        return view('dashboard.pengumuman.edit', compact('pengumuman'));
+        if(Auth::user()->id == $pengumuman->penulis || hasPermissionsTo('Announcer')){
+            return view('dashboard.pengumuman.edit', compact('pengumuman'));
+        }else{
+            abort('404');
+        }
+        
     }
 
     /**
