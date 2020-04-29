@@ -61,6 +61,8 @@ Route::group(['prefix' => 'dashboard'], function () {
 
     //Blog ROute
     Route::resource('blog','BlogController');
+
+    Route::resource('pengumuman','PengumumanController');
 });
 
 //Api for Auth
