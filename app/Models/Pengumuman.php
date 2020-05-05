@@ -14,4 +14,8 @@ class Pengumuman extends Model
     protected $primaryKey = 'uuid';
     protected $keyType = 'string';
     public $incrementing = false;
+
+    public function data_amil(){
+        return $this->belongsTo('App\User', 'penulis');  
+    }
 }

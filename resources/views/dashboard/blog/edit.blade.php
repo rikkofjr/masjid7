@@ -1,80 +1,71 @@
 @extends('layouts.startbootstrap')
 @section('TitleBar')
-    Pengguna
+    Blog
+@endsection
+
+@section('DynamicCSS')
+<link rel="stylesheet" href="{{ asset('vendor/trumbowyg/dist/ui/trumbowyg.min.css')}}">
+
 @endsection
 @section('Content')
 <!--Row1-->
 
 <!--Row2-->
 <div class="row">
-    <div class="col-md-12 col-lg-12 col-xl-6">
+    <div class="col-md-12 col-lg-12 col-xl-12">
         <div class="card">
             <div class="card-header">
-                <h4>edit Pengguna</h4>
+                <h4>Posting Blog</h4>
             </div>
             <div class="card-body">
-            {{ Form::model($user, array('route' => array('users.update', $user->id), 'method' => 'PUT')) }}{{-- Form model binding to automatically populate our fields with user data --}}
-
-    <div class="form-group">
-        {{ Form::label('name', 'Name') }}
-        {{ Form::text('name', null, array('class' => 'form-control')) }}
-    </div>
-
-    <div class="form-group">
-        {{ Form::label('email', 'Email') }}
-        {{ Form::email('email', null, array('class' => 'form-control')) }}
-    </div>
-
-    <h5><b>Give Role</b></h5>
-
-    <div class='form-group'>
-        @foreach ($roles as $role)
-            {{ Form::checkbox('roles[]',  $role->id, $user->roles ) }}
-            {{ Form::label($role->name, ucfirst($role->name)) }}<br>
-
-        @endforeach
-    </div>
-
-    {{ Form::submit('Add', array('class' => 'btn btn-primary')) }}
-
-    {{ Form::close() }}
-
-            </div>
-        </div>
-	</div>
-
-    <div class="col-md-12 col-lg-12 col-xl-6">
-    @if(Session::has('flash_message'))
+            @if (count($errors) > 0)
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+            @if(Session::has('rubah'))
             <div class="container">      
-                <div class="alert alert-success"><em> {!! session('flash_message') !!}</em>
+                <div class="alert alert-success"><em> {!! session('rubah') !!}</em>
                 </div>
             </div>
-        @endif 
-        <div class="card">
-            <div class="card-header">
-                <h4>Edit Password</h4>
-            </div>
-            <div class="card-body">
-            {{ Form::model($user, array('route' => array('updatepassword', $user->id), 'method' => 'PATCH')) }}{{-- Form model binding to automatically populate our fields with user data --}}
+            @endif 
+            {{ Form::model($blog, array('route' => array('blog.update', $blog->id), 'method' => 'PUT')) }}
 
-            <div class="form-group">
-                {{ Form::label('password', 'Password') }}<br>
-                {{ Form::password('password', array('class' => 'form-control')) }}
 
-            </div>
+                <div class="form-group">
+                    {{ Form::label('judul', 'Judul Blog') }}
+                    {{ Form::text('judul', 'judul', array('class' => 'form-control')) }}
+                </div>
+                <img src="{{asset('uploads')}}/{{$blog->gambar}}" width="100px" alt="">
+                <div class="form-group">
+                    {{ Form::label('gambar', 'Gambar Icon') }}
+                    <input type="file" name="gambar" id="gambar" class="form-controll">
+                </div>
+                
+                <div class="form-group">
+                    {{ Form::label('isi', 'Content') }}
+                    {{ Form::textarea('isi', 'isi', array('class' => 'form-control', 'id' => 'description')) }}
+                </div>
 
-            <div class="form-group">
-                {{ Form::label('password', 'Confirm Password') }}<br>
-                {{ Form::password('password_confirmation', array('class' => 'form-control')) }}
 
-            </div>
+                {{ Form::submit('Add', array('class' => 'btn btn-primary')) }}
 
-            {{ Form::submit('Add', array('class' => 'btn btn-primary')) }}
-
-            {{ Form::close() }}
+                {{ Form::close() }}
 
             </div>
         </div>
 	</div>
 </div>
+@endsection
+
+@section('DynamicScript')
+<script src="{{asset('vendor/trumbowyg/dist/trumbowyg.min.js')}}"></script>
+    <script>
+    // Doing this in a loaded JS file is better, I put this here for simplicity
+        $('#description').trumbowyg();
+    </script>
 @endsection

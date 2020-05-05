@@ -30,7 +30,7 @@ class ZisController extends Controller
     public function getFitrahDataByYear(){
         $nowHijri = \GeniusTS\HijriDate\Date::today()->format('Y');
         $nowMasehi = Carbon::today()->format('Y');
-        $dataFitrah = Zis::orderBy('id','desc')
+        $dataFitrah = Zis::orderBy('created_at','desc')
         ->whereYear('hijri',$nowHijri)
         ->where('zis_name', 1)->get(); 
         return Datatables::of($dataFitrah)
@@ -50,7 +50,7 @@ class ZisController extends Controller
     public function getMallDataByYear(){
         $nowHijri = \GeniusTS\HijriDate\Date::today()->format('Y');
         $nowMasehi = Carbon::today()->format('Y');
-        $dataFitrah = Zis::orderBy('id','desc')
+        $dataFitrah = Zis::orderBy('created_at','desc')
         ->whereYear('hijri',$nowHijri)
         ->where('zis_name', 2)
         ;
@@ -71,7 +71,7 @@ class ZisController extends Controller
     public function getFidyahDataByYear(){
         $nowHijri = \GeniusTS\HijriDate\Date::today()->format('Y');
         $nowMasehi = Carbon::today()->format('Y');
-        $dataFitrah = Zis::orderBy('id','desc')
+        $dataFitrah = Zis::orderBy('created_at','desc')
         ->whereYear('hijri',$nowHijri)
         ->where('zis_name', 3)
         ;
@@ -359,6 +359,14 @@ class ZisController extends Controller
             'todayHijri'=>$todayHijri
             ]);
         return $pdf->stream('zakat'.$zis_id.'.pdf');
+        
+    }
+    public function PrintZakatJamaah($uuidq){
+        $todayHijri =\GeniusTS\HijriDate\Date::today()->format('Y');
+        $zis = Zis::findOrFail($uuidq);
+
+        $pdf = PDF::loadview('dashboard.zis.print.print',['zis'=>$zis, 'todayHijri'=>$todayHijri]);
+        return $pdf->stream('zakat'.$uuidq.'.pdf');
         
     }
 }

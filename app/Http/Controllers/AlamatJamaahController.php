@@ -95,7 +95,7 @@ class AlamatJamaahController extends Controller
         $aj->uuid = Uuid::uuid4()->getHex();
         $aj->save();
 
-        return redirect()->route('alamat-jamaah.show', array('uuid' => $aj->id));
+        return redirect()->route('alamat-jamaah.show', $aj->id);
     }
 
     /**

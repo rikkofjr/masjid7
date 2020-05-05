@@ -76,7 +76,7 @@
     		<div class="row d-flex">
     			<div class="col-md-6 d-flex">
     				<div class="img img-video d-flex align-self-stretch align-items-center justify-content-center justify-content-md-end" style="background-image:url({{asset('lawncare/images/about.jpg')}});">
-    					<a href="https://vimeo.com/45830194" class="icon-video popup-vimeo d-flex justify-content-center align-items-center">
+    					<a href="https://www.youtube.com/watch?v=xDA76ZCnz88" class="icon-video popup-vimeo d-flex justify-content-center align-items-center">
     						<span class="icon-play"></span>
     					</a>
     				</div>

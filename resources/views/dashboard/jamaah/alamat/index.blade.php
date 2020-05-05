@@ -73,7 +73,15 @@
 											<td>{{$qk->rt}}</td>
 											<td>{{$qk->rw}}</td>
 											<td>{{$qk->anggota_keluarga_count}}</td>
-											<td>{{$qk->kategori_jamaah}}</td>
+											<td>
+												@if($qk->kategori_jamaah == 1) 
+													Jamaah Biasa 
+												@elseif($qk->kategori_jamaah == 2)
+													Donatur		
+												@else
+													Mustahiq				
+												@endif
+											</td>
 										</tr>
 									@endforeach
 									</tbody>

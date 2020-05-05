@@ -87,7 +87,7 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-md-6 py-2">
+    <div class="col-lg-6 col-md-12 py-2">
         <div class="card">
             <div class="card-header">
                 <h4>Grafik Pemasukan</h4>
@@ -99,7 +99,7 @@
             </div>
         </div>
 	</div>
-    <div class="col-md-6 py-2">
+    <div class="col-lg-6 col-md-12 py-2">
         <div class="card">
             <div class="card-header">
                 <h4>Grafik Pengeluaran</h4>

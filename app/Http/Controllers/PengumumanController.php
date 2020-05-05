@@ -20,6 +20,9 @@ use DB;
 
 class PengumumanController extends Controller
 {
+    public function __construct(){
+        $this->middleware(['isHumas'])->except(['index']);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -27,8 +30,12 @@ class PengumumanController extends Controller
      */
     public function index()
     {
-        $pengumuman = Pengumuman::paginate(3);
-        return view('dashboard.pengumuman.index', compact('pengumuman')); 
+        if(Auth::check()){
+            $pengumuman = Pengumuman::paginate(3);
+            return view('dashboard.pengumuman.index', compact('pengumuman')); 
+        }else{
+            return redirect()->route('login');
+        }
     }
 
     /**
@@ -39,6 +46,7 @@ class PengumumanController extends Controller
     public function create()
     {
         return view('dashboard.pengumuman.create');
+        
     }
 
     /**
@@ -89,7 +97,7 @@ class PengumumanController extends Controller
         
         $pengumuman = Pengumuman::findOrfail($id);
         //dd($pengumuman);
-        if(Auth::user()->id == $pengumuman->penulis || hasPermissionsTo('Announcer')){
+        if(Auth::user()->id == $pengumuman->penulis || Auth::user()->hasPermissionsTo('Announcer')){
             return view('dashboard.pengumuman.edit', compact('pengumuman'));
         }else{
             abort('404');

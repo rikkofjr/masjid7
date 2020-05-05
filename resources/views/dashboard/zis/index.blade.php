@@ -164,7 +164,7 @@
 					ajax: "{{route('jsonFitrahDataThisYear')}}",
 					columns: [
                         //{ data: 'DT_RowIndex', name:'DT_RowIndex',seacrhable:false, orderable:false},
-                        { data: 'created_at', name: 'created_at' },
+                        { data: 'created_at', name: 'created_at', orderable:false},
                         { data: 'atas_nama', name: 'atas_nama', render(data, type, row){
 							return "<a href='/dashboard/zis/"+row.uuidq+"'>" +row.atas_nama+  "</a>"
 						}},
@@ -181,7 +181,7 @@
 					ajax: "{{route('jsonMallDataThisYear')}}",
 					columns: [
                         //{ data: 'DT_RowIndex', name:'DT_RowIndex',seacrhable:false, orderable:false},
-                        { data: 'created_at', name: 'created_at' },
+                        { data: 'created_at', name: 'created_at', orderable:false },
                         { data: 'atas_nama', name: 'atas_nama', render(data, type, row){
 							return "<a href='/dashboard/zis/"+row.uuidq+"'>" +row.atas_nama+  "</a>"
 						}},
@@ -198,7 +198,7 @@
 					ajax: "{{route('jsonFidyahDataThisYear')}}",
 					columns: [
                         //{ data: 'DT_RowIndex', name:'DT_RowIndex',seacrhable:false, orderable:false},
-                        { data: 'created_at', name: 'created_at' },
+                        { data: 'created_at', name: 'created_at', orderable:false },
                         { data: 'atas_nama', name: 'atas_nama', render(data, type, row){
 							return "<a href='/dashboard/zis/"+row.uuidq+"'>" +row.atas_nama+  "</a>"
 						}},

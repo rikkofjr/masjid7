@@ -105,6 +105,32 @@
           </a>
         </li>
         @endcan
+        <!-- Heading -->
+        @can('Content')
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+        <div class="sidebar-heading">Humas</div>
+        <!--link for admin-->
+
+          <li class="nav-item">
+              <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#blog" aria-expanded="true" aria-controls="blog">
+              <i class="fas fa-fw fa-file"></i>
+              <span>Blog</span>
+              </a>
+              <div id="blog" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item" href="{{route ('blog.index')}}">Blog</a>
+                    <a class="collapse-item" href="{{route ('blog.create')}}">Buat Berita</a>
+                </div>
+              </div>
+          </li>
+          <li class="nav-item">
+          <a href="{{route('pengumuman.create')}}" class="nav-link collapsed">
+            <i class="fas fa-exclamation-triangle"></i>
+            <span>Buat Pengumuman</span>
+          </a>
+        </li>
+        @endcan
 
         <!-- Divider -->
         <hr class="sidebar-divider">

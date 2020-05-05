@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Image;
 use File;
 use Carbon\Carbon;
@@ -23,7 +24,8 @@ class BlogController extends Controller
      */
     public function index()
     {
-        //
+        $blog = Blog::orderBy('id', 'DESC')->paginate(10);
+        return view('dashboard.blog.index', compact('blog'));
     }
 
     /**
@@ -96,7 +98,8 @@ class BlogController extends Controller
      */
     public function edit($id)
     {
-        //
+        $blog = Blog::findOrFail($id);
+        return view('dashboard.blog.edit', compact('blog'));
     }
 
     /**
@@ -108,7 +111,35 @@ class BlogController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $messages = [
+            'judul.required' => 'Judul blog harap diisi',
+            'isi.required' => 'Isi blog harap diisi',
+            'gambar.max' => 'ukuran gambar tidak lebih dari :max kb ',
+            'gambar.mimes' => 'Extensi yang diperbolehkan hanya jpg,png,jpeg '
+        ];
+        $this->validate($request, [
+            'judul' => 'required',
+            'isi' => 'required',
+            'gambar' => 'image|mimes:jpg,png,jpeg|max:500'
+        ], $messages);
+        
+        $image = $request->file('gambar');
+
+        $blog = new Blog;
+        $blog->judul = $request->judul;
+        //if user upload image
+        if(is_uploaded_file($image)){
+            $imageName = 'blog-tmbn-' . time() . '.' . $image->getClientOriginalExtension();
+            $image->move('uploads',$imageName);
+            $blog->gambar = $imageName;
+        }
         //
+        $blog->isi = $request->isi;
+        $blog->penulis = Auth::user()->id;
+        $blog->save();
+        
+        //execut this method when image name has been posted in databse
+        return redirect()->back()->with('rubah', 'Data' .$blog->judul. 'Berhasil Dirubah');
     }
 
     /**

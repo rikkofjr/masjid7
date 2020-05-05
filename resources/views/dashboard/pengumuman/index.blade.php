@@ -75,7 +75,7 @@
                     </div>
                     <div class="col-lg-4">
                         <ul class="sc-widget">
-                            <li><i class="fa fa-user"></i> {{$p->penulis}}</li>
+                            <li><i class="fa fa-user"></i> {{$p->data_amil->name}}</li>
                             <li><i class="fa fa-calendar"></i> {{$p->created_at->diffForHumans()}} 
                             </li>
                         </ul>
@@ -94,21 +94,7 @@
 @endsection
 @section('DynamicScript')
 		<!-- Specific Page Vendor -->
-		<script src="{{asset('startbootstrap/vendor/datatables/jquery.dataTables.min.js')}}"></script>
-		<script src="{{asset('startbootstrap/vendor/datatables/dataTables.bootstrap4.min.js')}}"></script>
-        <script>
-			$(document).ready( function () {
-				$('#kasPenerimaan').DataTable();
-			} );
-			
-			$(document).ready( function () {
-				$('#tableDomba').DataTable();
-			} );
-			
-			$(document).ready( function () {
-				$('#tableSapi').DataTable();
-			} );
-		</script>
+		
         
 @endsection
 

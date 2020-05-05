@@ -108,7 +108,7 @@ class RoleController extends Controller {
         $role = Role::findOrFail($id);//Get role with the given id
     //Validate name and permission fields
         $this->validate($request, [
-            'name'=>'required|max:10|unique:roles,name,'.$id,
+            'name'=>'required|max:15|unique:roles,name,'.$id,
             'permissions' =>'required',
         ]);
 

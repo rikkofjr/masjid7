@@ -74,7 +74,8 @@ class DataJamaahController extends Controller
         $dj->save();
 
         //dd($dj);
-        return redirect()->route('alamat-jamaah.show', array('id' => $dj->id_alamat_jamaah));
+        return redirect()->back();
+        //return redirect()->route('alamat-jamaah.show',$dj->id_alamat_jamaah);
     }
 
     /**

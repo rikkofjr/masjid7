@@ -77,6 +77,8 @@ Route::group(['prefix' => 'json'],function() {
 Route::group(['prefix' => 'print'],function(){
     //Print Zakat {Fitrah, Mall, Fidyah}
     Route::get('/zakat/{zis_id}', 'ZisController@PrintZakat')->name('printZakatFull');
+    //Print Zakat {Fitrah, Mall, Fidyah}
+    Route::get('/zakat-jamaah/{uuidq}', 'ZisController@PrintZakatJamaah')->name('pringZakatJamaah');
     //Print Keluarga atau jamaah
     Route::get('/keluarga/{id}', 'AlamatJamaahController@PrintKeluarga')->name('printKeluarga');
 });

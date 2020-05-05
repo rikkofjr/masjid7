@@ -20,4 +20,8 @@ class Blog extends Model
             ]
         ];
     }
+
+    public function penulisnya(){
+        return $this->belongsTo('App\User', 'penulis');  
+    }
 }

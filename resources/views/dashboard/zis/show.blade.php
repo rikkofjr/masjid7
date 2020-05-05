@@ -44,13 +44,14 @@
                         </td>
                         <tr>
                         <td colspan="3">
-                            Kode : {{$zis->uuidq}}
+                            Kode : 
+                            <img src="data:image/png;base64,{{DNS2D::getBarcodePNG($zis->uuidq, 'QRCODE')}}" alt="barcode" />
                         </td>
                         </tr>
                     </tr>
                 </table>
                 <br>
-                <a href="#" class="btn btn-primary btn-icon-split">
+                <a href="{{route('pringZakatJamaah', $zis->uuidq)}}" class="btn btn-primary btn-icon-split">
                     <span class="icon text-white-50">
                       <i class="fas fa-print"></i>
                     </span>

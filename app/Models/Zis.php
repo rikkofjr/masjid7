@@ -36,7 +36,6 @@ class Zis extends Model
         
     }
     public function data_amil(){
-        return $this->belongsTo('App\User', 'amil');
-        
+        return $this->belongsTo('App\User', 'amil');  
     }
 }
