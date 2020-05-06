@@ -21,6 +21,29 @@ using colorlib
 <img src="https://rikkofjr.github.io/cv/img/dashboard.png">
 using start bootstrap
 
+## Install 
+1. you can clone this repository or download as zip<br/>
+<code>
+    git clone https://github.com/rikkofjr/masjid7.git
+</code><br/>
+2. install dependencies <br/>
+<code>composer install</code><br/>
+3. copy .env file
+<code>cp .env.example .env</code> 
+4. generate key
+<code>php artisan key:generate</code>
+5. import sql file <b>db_masjid.sql</b><br/>
+6. configure your database at .env file
+<code>
+DB_CONNECTION=
+DB_HOST=
+DB_PORT=
+DB_DATABASE=your db nam
+DB_USERNAME=
+DB_PASSWORD=
+</code><br/>
+7. Run the server
+<code>php artisan serve</code>
 ## Security Vulnerabilities
 
 If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
