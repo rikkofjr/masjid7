@@ -38,7 +38,7 @@
 
                 <div class="form-group">
                     {{ Form::label('judul', 'Judul Blog') }}
-                    {{ Form::text('judul', 'judul', array('class' => 'form-control')) }}
+                    {{ Form::text('judul', $blog->judul, array('class' => 'form-control')) }}
                 </div>
                 <img src="{{asset('uploads')}}/{{$blog->gambar}}" width="100px" alt="">
                 <div class="form-group">
@@ -48,7 +48,7 @@
                 
                 <div class="form-group">
                     {{ Form::label('isi', 'Content') }}
-                    {{ Form::textarea('isi', 'isi', array('class' => 'form-control', 'id' => 'description')) }}
+                    {{ Form::textarea('isi', $blog->isi, array('class' => 'form-control', 'id' => 'description')) }}
                 </div>
 
 

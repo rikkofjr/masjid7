@@ -76,7 +76,7 @@ class BlogController extends Controller
         $blog->save();
         
         //execut this method when image name has been posted in databse
-        return redirect()->back();
+        return redirect()->route('blog.index');
     }
 
     /**
@@ -125,7 +125,7 @@ class BlogController extends Controller
         
         $image = $request->file('gambar');
 
-        $blog = new Blog;
+        $blog = Blog::findOrFail($id);
         $blog->judul = $request->judul;
         //if user upload image
         if(is_uploaded_file($image)){

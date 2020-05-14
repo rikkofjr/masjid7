@@ -28,7 +28,6 @@ class Zis extends Model
     protected $dates = ['deleted_at'];
     protected $primaryKey ='uuidq';
     protected $keyType = 'string';
-    
     public $incrementing = false;
 
     public function jenis_zakat(){
@@ -38,4 +37,5 @@ class Zis extends Model
     public function data_amil(){
         return $this->belongsTo('App\User', 'amil');  
     }
+    
 }

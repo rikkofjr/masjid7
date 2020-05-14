@@ -17,8 +17,7 @@ class PengurusMiddleware
      */
     public function handle($request, Closure $next)
     {
-        $user = User::all()->count();
-        if (!Auth::user()->hasPermissionTo('Soft Delete Masjid Report')) {
+        if (!Auth::user()->hasPermissionTo('Create Masjid Report')) {
             abort('401');
         }
 

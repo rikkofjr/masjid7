@@ -12,6 +12,7 @@
         text-align:right;
     }
 </style>
+@can('Create Masjid Report' || 'Announcer')
 <div class="row">
     <!-- Earnings (Monthly) Card Example -->
     <div class="col-xl-3 col-md-6 mb-4">
@@ -112,6 +113,10 @@
         </div>
 	</div>
 </div>
+@endcan
+@can('Create Invoice')
+<x-createInvoice/>
+@endcan
 @endsection
 @section('DynamicScript')
 <script src="{{asset ('startbootstrap/vendor/chart.js/Chart.min.js')}}"></script>

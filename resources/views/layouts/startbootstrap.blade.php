@@ -154,6 +154,16 @@
               </div>
           </li>
         @endcan
+        @can('Create Invoice')
+        <div class="sidebar-heading">Jamaah</div>
+        <!--link for admin-->
+        <li class="nav-item">
+          <a href="{{route('invoice-zis.index')}}" class="nav-link collapsed">
+            <i class="fas fa-coins"></i>
+            <span>Pembayaran</span>
+          </a>
+        </li>
+        @endcan
         
 
         <!-- Divider -->

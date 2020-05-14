@@ -22,7 +22,7 @@ use DB;
 class ZisController extends Controller
 {
     public function __construct(){
-        $this->middleware(['auth']);
+        $this->middleware(['auth', 'isPengurus']);
     }
     /*
     * Export data to Json for client
