@@ -54,6 +54,7 @@ Route::group(['prefix' => 'dashboard'], function () {
     //Qurban Route
     Route::resource('qurban', 'QurbanController');
     Route::get('arsip/qurban','QurbanController@qurbanArchive')->name('qurbanArchive');
+    Route::get('softdelete/qurban/{id}','QurbanController@softDelete')->name('softDeleteQurban');
     //Jamaah Route
 
     //Jamaah Addres
@@ -78,6 +79,9 @@ Route::group(['prefix' => 'json'],function() {
 });
 //Print
 Route::group(['prefix' => 'print'],function(){
+    //Print Qurban
+    Route::get('/hewan/{jenis_hewan}', 'QurbanController@PrintHewan')->name('printHewanQurban');
+    Route::get('/hewan-jamaah/{nomor_hewan}', 'QurbanController@PrintHewanJamaah')->name('printHewanQurbanJamaah');
     //Print Zakat {Fitrah, Mall, Fidyah}
     Route::get('/zakat/{zis_id}', 'ZisController@PrintZakat')->name('printZakatFull');
     //Print Zakat {Fitrah, Mall, Fidyah}

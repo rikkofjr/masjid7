@@ -22,9 +22,19 @@
     .number-form{
         text-align:right;
     }
+	.badge-danger{
+        background:rgba(240,63,64, 0.7);
+    }
 </style>
 <!--Row2-->
 <div class="row">
+@if(Session::has('hapus'))
+            <div class="container">      
+                <div class="alert alert-success"><em> {!! session('hapus') !!}</em>
+                </div>
+            </div>
+        @endif 
+<!--Row2-->
 	<div class="col-md-12">
 		<div class="card shadow mb-4">
 			<div class="card-header py-3">
@@ -48,6 +58,12 @@
 							<br/>
 							<h1>Penerimaan Kambing</h1>
 							<br/>
+							<a href="{{route('printHewanQurban', 1)}}" class="btn btn-primary btn-icon-split">
+								<span class="icon text-white-50">
+								<i class="fas fa-print"></i>
+								</span>
+								<span class="text">Print</span>
+							</a>
 							<br/>
 							<div class="table-responsive">
 								<table class="table table-bordered" id="tableKambing" width="100%">
@@ -73,7 +89,11 @@
 												{{date('d-m-Y', strtotime($qk->created_at))}}
 												
 											</td>
-											<td>{{$qk->atas_nama}}</td>
+											<td> 
+												<a href="{{route('qurban.show', $qk->id)}}"> {{$qk->atas_nama}}</a>
+												<br/>
+												<b>{{$qk->nomor_handphone}}</b>	
+											</td>
 											<td>{{$qk->alamat}}</td>
 											<td>{{$qk->permintaan}}</td>
 											<td>{{$qk->keterangan}}</td>
@@ -90,6 +110,12 @@
 							<br/>
 							<h1>Penerimaan Domba</h1>
 							<br/>
+							<a href="{{route('printHewanQurban', 2)}}" class="btn btn-primary btn-icon-split">
+								<span class="icon text-white-50">
+								<i class="fas fa-print"></i>
+								</span>
+								<span class="text">Print</span>
+							</a>
 							<br/>
 							<table class="table table-bordered" id="tableDomba" width="100%">
 								<thead>
@@ -111,7 +137,11 @@
 									<tr class="{{$qd->disaksikan === 1 ? 'badge-danger' : '' }}">
 										<td>{{$no++}}</td>
 										<td>{{date('d-m-Y', strtotime($qd->created_at))}}</td>
-										<td>{{$qd->atas_nama}}</td>
+										<td>
+											<a href="{{route('qurban.show', $qd->id)}}"> {{$qd->atas_nama}}</a>
+											<br/>
+											<b>{{$qd->nomor_handphone}}</b>	
+										</td>
 										<td>{{$qd->alamat}}</td>
 										<td>{{$qd->permintaan}}</td>
 										<td>{{$qd->keterangan}}</td>
@@ -127,6 +157,12 @@
 							<br/>
 							<h1>Penerimaan Sapi</h1>
 							<br/>
+							<a href="{{route('printHewanQurban', 3)}}" class="btn btn-primary btn-icon-split">
+								<span class="icon text-white-50">
+								<i class="fas fa-print"></i>
+								</span>
+								<span class="text">Print</span>
+							</a>
 							<br/>
 							<table class="table table-bordered" id="tableSapi" width="100%">
 								<thead>
@@ -149,8 +185,10 @@
 										<td>{{$no++}}</td>
 										<td>{{date('d-m-Y', strtotime($qs->created_at))}}</td>
 										<td>
-											{{$qs->atas_nama}},
-											{{$qs->nama_lain}}
+										<a href="{{route('qurban.show', $qs->id)}}"> {{$qs->atas_nama}},
+											{{$qs->nama_lain}}</a>
+											<br/>
+											<b>{{$qs->nomor_handphone}}</b>
 										</td>
 										<td>{{$qs->alamat}}</td>
 										<td>{{$qs->permintaan}}</td>

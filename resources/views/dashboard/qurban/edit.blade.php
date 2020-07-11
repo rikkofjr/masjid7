@@ -1,7 +1,7 @@
 @extends('layouts.startbootstrap')
 
 @section('TitleBar')
-    Tambah Data Penerimaan Qurban Tahun {{$nowHijri}}H
+    Edit Data  Qurban Tahun {{$qurban->atas_nama}}
 @endsection
 
 @section('DynamicCss')
@@ -49,7 +49,7 @@
                     </ul>
                 </div>
             @endif
-                {{ Form::open(array('route' => 'qurban.store'))}}
+                {{ Form::model($qurban, array('route' => array('qurban.update', $qurban->id), 'method' => 'PUT')) }}
                 <div class="form-group">
                     <div class="row">
                         <div class="col" style="text-align:center;">
@@ -99,28 +99,28 @@
 
                         <div class="form-group">
                             {{ Form::label('atas_nama', 'Atas Nama') }}
-                            {{ Form::text('atas_nama', '', array('class' => 'form-control')) }}
+                            {{ Form::text('atas_nama', null,array('class' => 'form-control')) }}
                         </div>
 
                         <div class="form-group">
                             {{ Form::label('nama_lain', 'Nama Lain') }}
-                            {{ Form::textarea('nama_lain', '', array('class' => 'form-control')) }}
+                            {{ Form::textarea('nama_lain', null ,array('class' => 'form-control')) }}
                         </div>
                     
                         <div class="form-group">
                             {{ Form::label('alamat', 'Alamat') }}
-                            {{ Form::textarea('alamat', '', array('class' => 'form-control')) }}
+                            {{ Form::textarea('alamat', null,array('class' => 'form-control')) }}
                         </div>
 
                     </div>
                     <div class="col-md-4 col-sm-4 col-xs-4">
                         <div class="form-group">
                             {{ Form::label('permintaan', 'Permintaan') }}
-                            {{ Form::textarea('permintaan', '', array('class' => 'form-control')) }}
+                            {{ Form::textarea('permintaan', null,array('class' => 'form-control')) }}
                         </div>
                         <div class="form-group">
                             {{ Form::label('nomor_handphone', 'Nomor Handphone') }}
-                            {{ Form::number('nomor_handphone', '', array('class' => 'form-control')) }}
+                            {{ Form::number('nomor_handphone',null,array('class' => 'form-control')) }}
                         </div>
                         <br/>Keterangan Disaksikan
                         <div class="outerDivFull" >

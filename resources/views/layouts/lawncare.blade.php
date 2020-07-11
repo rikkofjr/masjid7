@@ -63,9 +63,9 @@
 	        <ul class="navbar-nav m-auto">
 	        	<li class="nav-item"><a href="{{route('clientIndex')}}" class="nav-link">Home</a></li>
 	        	<li class="nav-item"><a href="{{route('clientZakat')}}" class="nav-link">Zakat</a></li>
-            <li class="nav-item"><a href="services.html" class="nav-link">Qurban</a></li>
-	        	<li class="nav-item"><a href="gallery.html" class="nav-link">Kas Bulanan</a></li>
-	        	<li class="nav-item"><a href="blog.html" class="nav-link">Pengeluaran Bulanan</a></li>
+            <li class="nav-item"><a href="#" class="nav-link">Qurban</a></li>
+	        	<li class="nav-item"><a href="#" class="nav-link">Kas Bulanan</a></li>
+	        	<li class="nav-item"><a href="dashboard" class="nav-link">Dashboard</a></li>
 	        </ul>
 	      </div>
 	    </div>

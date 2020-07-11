@@ -283,9 +283,10 @@ class ZisController extends Controller
         //softdelte record
         if(Auth::user()->hasPermissionTo('Soft Delete Masjid Report')){
             $zis = zis::findOrFail($id);
+            $msg = 'Data '.$zis->atas_nama.' Berhasil Dihapus';
             $zis->delete();
             session()->put('hapus', $msg);
-            return route('zis.index');  
+            return redirect()->route('zis.index');  
         }else{
             abort('404');
         }
